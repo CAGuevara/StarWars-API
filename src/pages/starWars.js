@@ -32,67 +32,43 @@ const Starwars = () => {
                 .all([requestOne, requestTwo, requestThree, requestFour])
                 .then(
                     axios.spread((...responses) => {
-                        setShipInfo(responses)
-                        // console.log(responses)
-
-                        // responses.map((ship) => {
-
-                        //         setShipInfo([...shipInfo,ship.data.results])
-                        //         return (
-                        //             <div>
-
-                        //             </div>
-                        //         )
-                        //     }
-                        // console.log(shipInfo)
-
-                        // )
-
+                      const arrayShips=[]
+                        responses.forEach((ship)=> {
+                            // console.log(ship.data.next)
+                            arrayShips.push(ship.data.results)
+                        })
+                        setShipInfo(arrayShips.flat())    
+                        console.log(arrayShips)                  
 
                     }))
         } catch (error) {
             console.error(error)
 
-        } finally {
-            shipInfo.forEach((ship)=>{
-                const arrayShips=[]
-                ship.data.results.forEach((oneship)=>{
-                        console.log(oneship)
-                        arrayShips.push(oneship)
-                })
-                console.log("Inside  the Finally",arrayShips)
-                // setShipList([...shipList,ship.data.results])
-            })
-        }
+        } 
     }
     useEffect(() => {
         getShip()
     }, [])
-    console.log(shipList)
     return (
 
         <div className='main-container'>
-
-            {/* {console.log(shipInfo)} */}
             <h1>STAR WARS STARSHIPS</h1>
             <div className='card-container'>
                 {
 
                     shipInfo.map((ship) => {
-                        ship.data.results.map((ship) => {
-                            
-                            // console.log(ship.name)
+                    
                             return (
                                 <div>
 
                                     <div className='id-info' key={ship.name}>
                                         <h1>{ship.name} </h1>
                                         <h3> Model : {ship.model}</h3>
+                                        
                                     </div>
                                 </div>
 
-                            )
-                        })
+                            )        
                     })
 
                 }
