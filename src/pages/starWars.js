@@ -50,24 +50,21 @@ const Starwars = () => {
         getShip()
     }, [])
     return (
-
         <div className='main-container'>
-            <h1>STAR WARS STARSHIPS</h1>
+            <h1 className="hw-title">STAR WARS STARSHIPS</h1>
             <div className='card-container'>
                 {
-
-                    shipInfo.map((ship) => {
+                   shipInfo.map((ship) => {
                     
                             return (
-                                <div>
-
                                     <div className='id-info' key={ship.name}>
                                         <h1>{ship.name} </h1>
-                                        <h3> Model : {ship.model}</h3>
+                                        <h2>Model</h2>
+                                        <h3>{ship.model}</h3>
+                                        <h2>Manufacturer</h2>
+                                        <h3>{ship.manufacturer}</h3>
                                         
                                     </div>
-                                </div>
-
                             )        
                     })
 
